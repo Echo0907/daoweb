@@ -3,43 +3,179 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>道教服务网站</title>
+    <title>道法自然 - 道教服务平台</title>
     <link rel="stylesheet" href="css/style.css">
+    <!-- 添加字体图标 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- 添加动画库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 </head>
 <body>
+    <!-- 加载动画 -->
+    <div class="loading-screen">
+        <div class="taiji"></div>
+    </div>
+
+    <!-- 顶部导航 -->
     <header>
         <nav>
-            <div class="logo">道法自然</div>
-            <div class="language-switch">
-                <button>中文</button>
-                <button>English</button>
+            <div class="logo">
+                <img src="images/logo.png" alt="道法自然">
+                <span>道法自然</span>
+            </div>
+            <div class="nav-links">
+                <a href="#home" class="active">首页</a>
+                <a href="#masters">道长</a>
+                <a href="#services">服务</a>
+                <a href="#about">关于</a>
+                <a href="#contact">联系</a>
+            </div>
+            <div class="nav-right">
+                <div class="language-switch">
+                    <button class="active">中文</button>
+                    <button>English</button>
+                </div>
+                <button class="wallet-connect">
+                    <i class="fas fa-wallet"></i>
+                    <span>连接钱包</span>
+                </button>
             </div>
         </nav>
     </header>
-    
+
     <main>
-        <section class="hero">
-            <h1>欢迎来到道教服务平台</h1>
+        <!-- 主页横幅 -->
+        <section id="home" class="hero">
+            <div class="hero-content animate__animated animate__fadeIn">
+                <h1>传承千年道法 · 守护心灵净土</h1>
+                <p>专业道教服务平台，连接现代科技与传统文化</p>
+                <button class="cta-button">开始咨询</button>
+            </div>
+            <div class="floating-elements">
+                <img src="images/bagua.png" class="bagua" alt="八卦">
+            </div>
         </section>
-        
-        <section class="services">
-            <h2>我们的服务</h2>
+
+        <!-- 道长展示 -->
+        <section id="masters" class="masters">
+            <h2>道长介绍</h2>
+            <div class="masters-grid">
+                <div class="master-card">
+                    <div class="master-image">
+                        <img src="images/master1.jpg" alt="张道长">
+                        <div class="status online"></div>
+                    </div>
+                    <div class="master-info">
+                        <h3>张道长</h3>
+                        <p class="experience">从业经验：20年</p>
+                        <div class="specialties">
+                            <span>符咒</span>
+                            <span>风水</span>
+                            <span>算命</span>
+                        </div>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span>4.8</span>
+                        </div>
+                        <button class="consult-button">立即咨询</button>
+                    </div>
+                </div>
+                <!-- 可以添加更多道长卡片 -->
+            </div>
+        </section>
+
+        <!-- 服务介绍 -->
+        <section id="services" class="services">
+            <h2>道教服务</h2>
             <div class="service-grid">
                 <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-scroll"></i>
+                    </div>
                     <h3>符咒制作</h3>
+                    <p>专业道长亲手绘制，保平安镇宅驱邪</p>
+                    <div class="price">
+                        <span class="amount">0.1 ETH</span>
+                        <span class="duration">起</span>
+                    </div>
+                    <button class="order-button">预约服务</button>
                 </div>
-                <div class="service-card">
-                    <h3>算命服务</h3>
+                <!-- 添加更多服务卡片 -->
+            </div>
+        </section>
+
+        <!-- 关于我们 -->
+        <section id="about" class="about">
+            <div class="about-content">
+                <h2>关于我们</h2>
+                <p>道法自然平台致力于传承和弘扬中国传统道教文化，通过现代科技手段，为广大信众提供专业可靠的道教服务。</p>
+                <div class="stats">
+                    <div class="stat-item">
+                        <span class="number">1000+</span>
+                        <span class="label">服务用户</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="number">50+</span>
+                        <span class="label">认证道长</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="number">98%</span>
+                        <span class="label">好评率</span>
+                    </div>
                 </div>
-                <div class="service-card">
-                    <h3>问卦解惑</h3>
+            </div>
+        </section>
+
+        <!-- 联系方式 -->
+        <section id="contact" class="contact">
+            <h2>联系我们</h2>
+            <div class="contact-container">
+                <form class="contact-form">
+                    <input type="text" placeholder="您的称呼">
+                    <input type="email" placeholder="电子邮箱">
+                    <textarea placeholder="请描述您的需求"></textarea>
+                    <button type="submit">发送信息</button>
+                </form>
+                <div class="contact-info">
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>contact@daofa.com</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+86 123 4567 8900</span>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
 
     <footer>
-        <p>© 2024 道教服务平台</p>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>关注我们</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-weixin"></i></a>
+                    <a href="#"><i class="fab fa-weibo"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>快速链接</h3>
+                <ul>
+                    <li><a href="#services">服务项目</a></li>
+                    <li><a href="#masters">道长介绍</a></li>
+                    <li><a href="#about">关于我们</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 道法自然. All rights reserved.</p>
+        </div>
     </footer>
 
     <script src="js/main.js"></script>
