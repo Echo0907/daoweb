@@ -3,14 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>玄妙 - 道教服务平台</title>
+    <title>玄妙 - 道法自然</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+    <!-- 符咒装饰元素 -->
+    <img src="images/talisman-1.png" alt="" class="talisman-decoration talisman-1">
+    <img src="images/talisman-2.png" alt="" class="talisman-decoration talisman-2">
+
     <!-- 顶部信息栏 -->
     <div class="top-banner">
-        专业道教服务平台 | 严格认证道长 | 安全可靠
+        道法自然 • 天人合一
     </div>
 
     <!-- 头部区域 -->
@@ -35,25 +39,57 @@
         <!-- 业务介绍 -->
         <section class="intro">
             <div class="intro-tabs">
-                <button class="tab active" data-tab="service">服务介绍</button>
+                <button class="tab active" data-tab="service">玄门法术</button>
                 <button class="tab" data-tab="rules">规则说明</button>
             </div>
             <div class="tab-content">
                 <div class="tab-pane active" id="service">
-                    <h2>道教服务内容</h2>
-                    <ul>
-                        <li>八字算命：解析人生命运</li>
-                        <li>紫微斗数：了解运势变化</li>
-                        <li>符咒制作：化解运势阻碍</li>
-                    </ul>
+                    <h2>道法服务</h2>
+                    <div class="service-grid">
+                        <div class="service-item">
+                            <div class="service-icon">
+                                <img src="images/bazi-icon.png" alt="八字">
+                            </div>
+                            <h3>八字命理</h3>
+                            <p>解析人生命运，明晰前程去向</p>
+                        </div>
+                        <div class="service-item">
+                            <div class="service-icon">
+                                <img src="images/ziwei-icon.png" alt="紫微">
+                            </div>
+                            <h3>紫微斗数</h3>
+                            <p>洞察命盘玄机，预知运势变化</p>
+                        </div>
+                        <div class="service-item">
+                            <div class="service-icon">
+                                <img src="images/talisman-icon.png" alt="符咒">
+                            </div>
+                            <h3>符咒制作</h3>
+                            <p>化解运势阻碍，趋吉避凶</p>
+                        </div>
+                    </div>
                 </div>
                 <div class="tab-pane" id="rules">
                     <h2>服务规则</h2>
-                    <ul>
-                        <li>预约付款后24小时内安排服务</li>
-                        <li>可提前一周预约时段</li>
-                        <li>如需取消预约请提前12小时</li>
-                    </ul>
+                    <div class="rules-content">
+                        <div class="rule-item">
+                            <h3>预约流程</h3>
+                            <ul>
+                                <li>选择服务类型</li>
+                                <li>填写生辰八字</li>
+                                <li>确认预约时段</li>
+                                <li>完成支付预约</li>
+                            </ul>
+                        </div>
+                        <div class="rule-item">
+                            <h3>注意事项</h3>
+                            <ul>
+                                <li>预约后24小时内安排服务</li>
+                                <li>可提前一周预约时段</li>
+                                <li>如需取消需提前12小时</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -63,31 +99,36 @@
             <h2>今日当值道长</h2>
             <div class="master-card">
                 <div class="master-image">
-                    <img src="images/master1.jpg" alt="张道长">
+                    <img src="images/master.jpg" alt="张道长">
+                    <div class="master-status online"></div>
                 </div>
                 <div class="master-info">
-                    <h3>张道长</h3>
+                    <div class="master-header">
+                        <h3>张道长</h3>
+                        <p class="master-title">玄门法师 • 紫微斗数大师</p>
+                    </div>
+                    <div class="master-description">
+                        <p>自幼习道，精研易经八卦，紫微斗数。三十载修道经验，专注于人生指引、姻缘化解、事业规划等领域。</p>
+                    </div>
                     <div class="specialties">
                         <span>八字命理</span>
                         <span>紫微斗数</span>
                         <span>符咒制作</span>
                     </div>
-                    <div class="schedule">
-                        <span class="next-available">下一个可预约时段：2024年3月20日</span>
-                    </div>
-                    <button class="book-button">立即预约</button>
-                </div>
-                <div class="master-reviews">
-                    <div class="rating">
-                        <span class="stars">★★★★★</span>
-                        <span class="rating-number">4.9</span>
-                    </div>
-                    <div class="review-list">
-                        <div class="review-item">
-                            <p>"张道长的解读非常准确，给了我很多启发。"</p>
-                            <span class="reviewer">- 李先生</span>
+                    <div class="master-availability">
+                        <div class="next-slot">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>下一可预约时段：寅时 (3:00-5:00)</span>
+                        </div>
+                        <div class="queue-info">
+                            <i class="fas fa-users"></i>
+                            <span>当前排队：3人</span>
                         </div>
                     </div>
+                    <button class="book-button">
+                        <span>预约问道</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
                 </div>
             </div>
         </section>
@@ -96,44 +137,60 @@
     <!-- 预约弹窗 -->
     <div class="booking-modal" id="bookingModal">
         <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <h2>预约服务</h2>
+            <div class="modal-header">
+                <h2>预约问道</h2>
+                <span class="close-modal">&times;</span>
+            </div>
             <form id="bookingForm">
                 <div class="form-group">
-                    <label>姓名</label>
+                    <label>道友称呼</label>
                     <input type="text" name="name" required>
                 </div>
                 <div class="form-group">
-                    <label>出生日期</label>
+                    <label>生辰年月</label>
                     <input type="date" name="birthdate" required>
                 </div>
                 <div class="form-group">
-                    <label>出生时辰</label>
+                    <label>生辰时辰</label>
                     <select name="birthtime" required>
                         <option value="">请选择</option>
                         <option value="子时">子时 (23:00-1:00)</option>
                         <option value="丑时">丑时 (1:00-3:00)</option>
-                        <!-- 其他时辰选项 -->
+                        <option value="寅时">寅时 (3:00-5:00)</option>
+                        <option value="卯时">卯时 (5:00-7:00)</option>
+                        <option value="辰时">辰时 (7:00-9:00)</option>
+                        <option value="巳时">巳时 (9:00-11:00)</option>
+                        <option value="午时">午时 (11:00-13:00)</option>
+                        <option value="未时">未时 (13:00-15:00)</option>
+                        <option value="申时">申时 (15:00-17:00)</option>
+                        <option value="酉时">酉时 (17:00-19:00)</option>
+                        <option value="戌时">戌时 (19:00-21:00)</option>
+                        <option value="亥时">亥时 (21:00-23:00)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>求问类型</label>
+                    <select name="service" required>
+                        <option value="">请选择</option>
+                        <option value="八字">八字命理</option>
+                        <option value="紫微">紫微斗数</option>
+                        <option value="符咒">符咒制作</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label>联系方式</label>
                     <input type="tel" name="phone" required>
                 </div>
-                <div class="form-group">
-                    <label>服务类型</label>
-                    <select name="service" required>
-                        <option value="">请选择</option>
-                        <option value="八字">八字算命</option>
-                        <option value="紫微">紫微斗数</option>
-                        <option value="符咒">符咒制作</option>
-                    </select>
-                </div>
                 <div class="price-info">
-                    <span>服务费用：</span>
-                    <span class="price">0.1 ETH</span>
+                    <div class="price-detail">
+                        <span>服务费用</span>
+                        <span class="price">0.1 ETH</span>
+                    </div>
+                    <p class="price-note">* 费用将用于道场维护及法事所需</p>
                 </div>
-                <button type="submit">确认预约</button>
+                <button type="submit" class="submit-button">
+                    确认预约
+                </button>
             </form>
         </div>
     </div>

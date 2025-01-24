@@ -1,11 +1,12 @@
 /* 基础样式 */
 :root {
-    --primary-color: #8B0000;
-    --secondary-color: #FFD700;
-    --text-color: #333;
+    --primary-color: #000;
+    --secondary-color: #333;
+    --text-color: #111;
     --light-text: #fff;
     --bg-color: #f5f5f5;
-    --card-bg: #fff;
+    --ink-wash: rgba(0, 0, 0, 0.05);
+    --card-bg: rgba(255, 255, 255, 0.95);
     --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -16,10 +17,25 @@
 }
 
 body {
-    font-family: "Microsoft YaHei", sans-serif;
-    line-height: 1.6;
-    background: var(--bg-color);
+    font-family: "FangSong", "仿宋", "SimSun", "宋体", serif;
+    line-height: 1.8;
+    background: #fff url('../images/ink-wash-bg.jpg') no-repeat center center fixed;
+    background-size: cover;
     color: var(--text-color);
+}
+
+/* 水墨效果遮罩 */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../images/texture.png');
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 1;
 }
 
 /* 顶部信息栏 */
@@ -27,54 +43,64 @@ body {
     background: var(--primary-color);
     color: var(--light-text);
     text-align: center;
-    padding: 8px;
-    font-size: 0.9rem;
+    padding: 12px;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* 头部区域 */
 header {
-    background: #fff;
+    background: rgba(0, 0, 0, 0.85);
     padding: 1rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: var(--shadow);
+    backdrop-filter: blur(10px);
 }
 
 .logo img {
-    height: 40px;
+    height: 50px;
+    filter: brightness(0) invert(1);
 }
 
 .header-right {
     display: flex;
-    gap: 1rem;
+    gap: 1.5rem;
     align-items: center;
 }
 
 .language-switch button {
     background: none;
-    border: 1px solid #ddd;
-    padding: 5px 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 6px 12px;
     cursor: pointer;
     transition: all 0.3s ease;
+    color: var(--light-text);
+    font-family: inherit;
 }
 
 .language-switch button.active {
-    background: var(--primary-color);
-    color: var(--light-text);
-    border-color: var(--primary-color);
+    background: var(--light-text);
+    color: var(--primary-color);
+    border-color: var(--light-text);
 }
 
 .wallet-connect {
-    background: var(--primary-color);
+    background: transparent;
     color: var(--light-text);
-    border: none;
+    border: 1px solid rgba(255, 255, 255, 0.2);
     padding: 8px 16px;
-    border-radius: 4px;
     cursor: pointer;
     display: flex;
     align-items: center;
     gap: 8px;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.wallet-connect:hover {
+    background: rgba(255, 255, 255, 0.1);
 }
 
 /* 主要内容区域 */
@@ -82,123 +108,161 @@ main {
     max-width: 1200px;
     margin: 2rem auto;
     padding: 0 1rem;
+    position: relative;
+    z-index: 2;
+}
+
+/* 符咒装饰元素 */
+.talisman-decoration {
+    position: fixed;
+    width: 200px;
+    height: 200px;
+    opacity: 0.03;
+    pointer-events: none;
+}
+
+.talisman-1 {
+    top: 10%;
+    left: 5%;
+    transform: rotate(-15deg);
+}
+
+.talisman-2 {
+    bottom: 10%;
+    right: 5%;
+    transform: rotate(15deg);
 }
 
 /* 介绍标签页 */
 .intro-tabs {
     display: flex;
-    gap: 1rem;
-    margin-bottom: 1rem;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    justify-content: center;
 }
 
 .tab {
-    padding: 10px 20px;
+    padding: 12px 24px;
     border: none;
     background: none;
     cursor: pointer;
-    font-size: 1.1rem;
-    border-bottom: 2px solid transparent;
+    font-size: 1.2rem;
+    color: var(--text-color);
+    position: relative;
+    font-family: inherit;
+    letter-spacing: 2px;
 }
 
-.tab.active {
-    border-bottom-color: var(--primary-color);
-    color: var(--primary-color);
+.tab::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.tab.active::after {
+    width: 100%;
 }
 
 .tab-content {
     background: var(--card-bg);
-    padding: 2rem;
-    border-radius: 8px;
+    padding: 3rem;
+    border-radius: 2px;
     box-shadow: var(--shadow);
-}
-
-.tab-pane {
-    display: none;
-}
-
-.tab-pane.active {
-    display: block;
-}
-
-.tab-pane h2 {
-    margin-bottom: 1rem;
-    color: var(--primary-color);
-}
-
-.tab-pane ul {
-    list-style: none;
-}
-
-.tab-pane ul li {
-    margin-bottom: 0.5rem;
-    padding-left: 1.5rem;
     position: relative;
+    overflow: hidden;
 }
 
-.tab-pane ul li:before {
-    content: "•";
-    color: var(--primary-color);
+.tab-content::before {
+    content: '';
     position: absolute;
+    top: 0;
     left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../images/paper-texture.jpg');
+    opacity: 0.05;
+    pointer-events: none;
 }
 
 /* 当值道长卡片 */
 .master-today {
-    margin-top: 3rem;
+    margin-top: 4rem;
 }
 
 .master-today h2 {
-    margin-bottom: 1.5rem;
-    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+    letter-spacing: 4px;
 }
 
 .master-card {
     background: var(--card-bg);
-    border-radius: 8px;
+    border-radius: 2px;
     box-shadow: var(--shadow);
     display: grid;
-    grid-template-columns: 300px 1fr;
-    gap: 2rem;
-    padding: 2rem;
+    grid-template-columns: 350px 1fr;
+    gap: 3rem;
+    padding: 3rem;
+    position: relative;
+}
+
+.master-image {
+    position: relative;
 }
 
 .master-image img {
     width: 100%;
-    height: 400px;
+    height: 450px;
     object-fit: cover;
-    border-radius: 4px;
+    filter: grayscale(100%);
+    transition: filter 0.3s ease;
+}
+
+.master-image:hover img {
+    filter: grayscale(0%);
 }
 
 .master-info {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.5rem;
 }
 
 .master-info h3 {
-    font-size: 1.5rem;
-    color: var(--primary-color);
+    font-size: 2rem;
+    letter-spacing: 3px;
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+.master-info h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 2px;
+    background: var(--primary-color);
 }
 
 .specialties {
     display: flex;
-    gap: 0.5rem;
+    gap: 1rem;
     flex-wrap: wrap;
 }
 
 .specialties span {
-    background: #f0f0f0;
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 0.9rem;
-}
-
-.schedule {
-    margin: 1rem 0;
-}
-
-.next-available {
-    color: #666;
+    background: var(--ink-wash);
+    padding: 8px 16px;
+    border-radius: 2px;
+    font-size: 1rem;
+    letter-spacing: 1px;
 }
 
 .book-button {
@@ -206,40 +270,16 @@ main {
     color: var(--light-text);
     border: none;
     padding: 12px 24px;
-    border-radius: 4px;
     cursor: pointer;
     font-size: 1.1rem;
     width: fit-content;
+    letter-spacing: 2px;
+    font-family: inherit;
+    transition: all 0.3s ease;
 }
 
-/* 评价区域 */
-.master-reviews {
-    margin-top: 2rem;
-}
-
-.rating {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-}
-
-.stars {
-    color: var(--secondary-color);
-}
-
-.review-list {
-    border-top: 1px solid #eee;
-    padding-top: 1rem;
-}
-
-.review-item {
-    margin-bottom: 1rem;
-}
-
-.reviewer {
-    color: #666;
-    font-size: 0.9rem;
+.book-button:hover {
+    background: var(--secondary-color);
 }
 
 /* 预约弹窗 */
@@ -250,59 +290,48 @@ main {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.8);
     z-index: 1000;
+    backdrop-filter: blur(5px);
 }
 
 .modal-content {
     background: var(--card-bg);
     width: 90%;
     max-width: 500px;
-    margin: 2rem auto;
-    padding: 2rem;
-    border-radius: 8px;
+    margin: 4rem auto;
+    padding: 3rem;
+    border-radius: 2px;
     position: relative;
 }
 
-.close-modal {
+.modal-content::before {
+    content: '';
     position: absolute;
-    right: 1rem;
-    top: 1rem;
-    font-size: 1.5rem;
-    cursor: pointer;
-}
-
-.form-group {
-    margin-bottom: 1rem;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-}
-
-.form-group input,
-.form-group select {
+    top: 0;
+    left: 0;
     width: 100%;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    height: 100%;
+    background: url('../images/paper-texture.jpg');
+    opacity: 0.05;
+    pointer-events: none;
 }
 
-.price-info {
-    margin: 1rem 0;
-    padding: 1rem;
-    background: #f9f9f9;
-    border-radius: 4px;
+/* 动画效果 */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
-/* 响应式设计 */
-@media (max-width: 768px) {
-    .master-card {
-        grid-template-columns: 1fr;
-    }
+@keyframes slideIn {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
 
-    .master-image img {
-        height: 300px;
-    }
+.master-card {
+    animation: slideIn 0.6s ease-out;
+}
+
+.tab-content {
+    animation: fadeIn 0.4s ease-out;
 }
