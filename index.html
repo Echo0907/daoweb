@@ -1,265 +1,142 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="zh">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>玄妙之道 - 传统道教文化服务平台</title>
+    <title>玄妙 - 道教服务平台</title>
     <link rel="stylesheet" href="css/style.css">
-    <!-- 添加字体和图标 -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- 添加动画库 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 </head>
 <body>
-    <!-- 加载动画 -->
-    <div class="loading-screen">
-        <div class="taiji-loader"></div>
-        <div class="loading-text">正在连接天地灵气...</div>
+    <!-- 顶部信息栏 -->
+    <div class="top-banner">
+        专业道教服务平台 | 严格认证道长 | 安全可靠
     </div>
 
-    <!-- 音乐播放器 -->
-    <div class="music-player">
-        <audio id="bgMusic" loop>
-            <source src="audio/guqin.mp3" type="audio/mp3">
-        </audio>
-        <button id="musicToggle">
-            <i class="fas fa-music"></i>
-        </button>
-    </div>
-
-    <!-- 导航栏 -->
-    <header class="main-header">
-        <nav>
-            <div class="nav-left">
-                <div class="logo">
-                    <img src="images/logo.png" alt="玄妙之道">
-                    <span class="logo-text">玄妙之道</span>
-                </div>
+    <!-- 头部区域 -->
+    <header>
+        <div class="logo">
+            <img src="images/logo.png" alt="玄妙">
+        </div>
+        <div class="header-right">
+            <div class="language-switch">
+                <button class="active">中文</button>
+                <button>EN</button>
             </div>
-            <div class="nav-center">
-                <a href="#home" class="nav-link active">首页</a>
-                <a href="#masters" class="nav-link">道长</a>
-                <a href="#services" class="nav-link">服务</a>
-                <a href="#culture" class="nav-link">文化</a>
-                <a href="#contact" class="nav-link">联系</a>
-            </div>
-            <div class="nav-right">
-                <div class="language-switch">
-                    <button class="active">中文</button>
-                    <button>English</button>
-                </div>
-                <button class="wallet-connect">
-                    <i class="fas fa-wallet"></i>
-                    <span>连接钱包</span>
-                </button>
-            </div>
-        </nav>
+            <button class="wallet-connect">
+                <i class="fas fa-wallet"></i>
+                <span>连接钱包</span>
+            </button>
+        </div>
     </header>
 
+    <!-- 主要内容 -->
     <main>
-        <!-- 首页横幅 -->
-        <section id="home" class="hero">
-            <div class="mystical-elements">
-                <div class="floating-symbol symbol-1"></div>
-                <div class="floating-symbol symbol-2"></div>
-                <div class="floating-symbol symbol-3"></div>
+        <!-- 业务介绍 -->
+        <section class="intro">
+            <div class="intro-tabs">
+                <button class="tab active" data-tab="service">服务介绍</button>
+                <button class="tab" data-tab="rules">规则说明</button>
             </div>
-            <div class="hero-content animate__animated animate__fadeIn">
-                <h1 class="chinese-title">解密古老智慧 · 寻找生命真谛</h1>
-                <h2 class="english-subtitle">Unlock the Mysteries of Ancient Chinese Wisdom</h2>
-                <p class="hero-description">
-                    体验千年传承的算命、占卜与灵性指引
-                    <br>
-                    Experience centuries-old fortune-telling, divination, and spiritual guidance
-                </p>
-                <div class="cta-buttons">
-                    <button class="cta-primary">开始咨询</button>
-                    <button class="cta-secondary">探索服务</button>
-                </div>
-            </div>
-            <div class="scroll-indicator">
-                <span>向下滚动探索更多</span>
-                <i class="fas fa-chevron-down"></i>
-            </div>
-        </section>
-
-        <!-- 服务特色 -->
-        <section class="features">
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <i class="fas fa-star"></i>
-                    <h3>专业认证</h3>
-                    <p>道长均经严格认证，确保服务质量</p>
-                </div>
-                <div class="feature-card">
-                    <i class="fas fa-shield-alt"></i>
-                    <h3>隐私保护</h3>
-                    <p>全程加密，保护个人信息</p>
-                </div>
-                <div class="feature-card">
-                    <i class="fas fa-clock"></i>
-                    <h3>24/7服务</h3>
-                    <p>随时在线，即时解答</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- 服务类别 -->
-        <section id="services" class="services">
-            <h2 class="section-title">道教服务</h2>
-            <div class="service-grid">
-                <div class="service-card fortune">
-                    <div class="service-icon">
-                        <i class="fas fa-moon"></i>
-                    </div>
-                    <h3>算命服务</h3>
-                    <ul class="service-list">
-                        <li>八字算命</li>
-                        <li>紫微斗数</li>
-                        <li>姓名测算</li>
+            <div class="tab-content">
+                <div class="tab-pane active" id="service">
+                    <h2>道教服务内容</h2>
+                    <ul>
+                        <li>八字算命：解析人生命运</li>
+                        <li>紫微斗数：了解运势变化</li>
+                        <li>符咒制作：化解运势阻碍</li>
                     </ul>
-                    <div class="price">
-                        <span class="amount">0.1 ETH</span>
-                        <span class="duration">起</span>
+                </div>
+                <div class="tab-pane" id="rules">
+                    <h2>服务规则</h2>
+                    <ul>
+                        <li>预约付款后24小时内安排服务</li>
+                        <li>可提前一周预约时段</li>
+                        <li>如需取消预约请提前12小时</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 当值道长 -->
+        <section class="master-today">
+            <h2>今日当值道长</h2>
+            <div class="master-card">
+                <div class="master-image">
+                    <img src="images/master1.jpg" alt="张道长">
+                </div>
+                <div class="master-info">
+                    <h3>张道长</h3>
+                    <div class="specialties">
+                        <span>八字命理</span>
+                        <span>紫微斗数</span>
+                        <span>符咒制作</span>
+                    </div>
+                    <div class="schedule">
+                        <span class="next-available">下一个可预约时段：2024年3月20日</span>
                     </div>
                     <button class="book-button">立即预约</button>
                 </div>
-                <!-- 更多服务卡片 -->
-            </div>
-        </section>
-
-        <!-- 道长展示 -->
-        <section id="masters" class="masters">
-            <h2 class="section-title">道长介绍</h2>
-            <div class="masters-grid">
-                <!-- 示例道长卡片 -->
-                <div class="master-card">
-                    <div class="master-image">
-                        <img src="images/master1.jpg" alt="张道长">
-                        <div class="status online"></div>
+                <div class="master-reviews">
+                    <div class="rating">
+                        <span class="stars">★★★★★</span>
+                        <span class="rating-number">4.9</span>
                     </div>
-                    <div class="master-info">
-                        <h3>张道长</h3>
-                        <p class="title">玄学大师</p>
-                        <p class="experience">从业20年</p>
-                        <div class="specialties">
-                            <span>八字</span>
-                            <span>紫微斗数</span>
-                            <span>符咒</span>
+                    <div class="review-list">
+                        <div class="review-item">
+                            <p>"张道长的解读非常准确，给了我很多启发。"</p>
+                            <span class="reviewer">- 李先生</span>
                         </div>
-                        <div class="rating">
-                            <div class="stars">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                            <span class="rating-number">4.8</span>
-                        </div>
-                        <button class="consult-button">
-                            <i class="fas fa-comments"></i>
-                            立即咨询
-                        </button>
-                    </div>
-                </div>
-                <!-- 更多道长卡片 -->
-            </div>
-        </section>
-
-        <!-- 文化介绍 -->
-        <section id="culture" class="culture">
-            <h2 class="section-title">道教文化</h2>
-            <div class="culture-grid">
-                <div class="culture-card">
-                    <img src="images/bazi.jpg" alt="八字">
-                    <h3>八字命理</h3>
-                    <p>探索生命密码，了解天人合一</p>
-                    <a href="#" class="learn-more">了解更多</a>
-                </div>
-                <!-- 更多文化卡片 -->
-            </div>
-        </section>
-
-        <!-- 用户评价 -->
-        <section class="testimonials">
-            <h2 class="section-title">用户心声</h2>
-            <div class="testimonial-slider">
-                <div class="testimonial-card">
-                    <div class="quote">"通过张道长的指点，我找到了人生方向..."</div>
-                    <div class="author">
-                        <img src="images/user1.jpg" alt="用户">
-                        <div class="author-info">
-                            <h4>李先生</h4>
-                            <p>企业家</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- 更多评价 -->
-            </div>
-        </section>
-
-        <!-- 联系我们 -->
-        <section id="contact" class="contact">
-            <h2 class="section-title">联系我们</h2>
-            <div class="contact-container">
-                <form class="contact-form">
-                    <div class="form-group">
-                        <input type="text" placeholder="您的称呼">
-                    </div>
-                    <div class="form-group">
-                        <input type="email" placeholder="电子邮箱">
-                    </div>
-                    <div class="form-group">
-                        <textarea placeholder="请描述您的需求"></textarea>
-                    </div>
-                    <button type="submit">发送信息</button>
-                </form>
-                <div class="contact-info">
-                    <div class="info-item">
-                        <i class="fas fa-envelope"></i>
-                        <span>contact@xuanmiao.com</span>
-                    </div>
-                    <div class="info-item">
-                        <i class="fas fa-phone"></i>
-                        <span>+86 123 4567 8900</span>
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>关注我们</h3>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-weixin"></i></a>
-                    <a href="#"><i class="fab fa-weibo"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
+    <!-- 预约弹窗 -->
+    <div class="booking-modal" id="bookingModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>预约服务</h2>
+            <form id="bookingForm">
+                <div class="form-group">
+                    <label>姓名</label>
+                    <input type="text" name="name" required>
                 </div>
-            </div>
-            <div class="footer-section">
-                <h3>快速链接</h3>
-                <ul>
-                    <li><a href="#services">服务项目</a></li>
-                    <li><a href="#masters">道长介绍</a></li>
-                    <li><a href="#about">关于我们</a></li>
-                    <li><a href="#privacy">隐私政策</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>服务时间</h3>
-                <p>全天24小时</p>
-                <p>节假日正常服务</p>
-            </div>
+                <div class="form-group">
+                    <label>出生日期</label>
+                    <input type="date" name="birthdate" required>
+                </div>
+                <div class="form-group">
+                    <label>出生时辰</label>
+                    <select name="birthtime" required>
+                        <option value="">请选择</option>
+                        <option value="子时">子时 (23:00-1:00)</option>
+                        <option value="丑时">丑时 (1:00-3:00)</option>
+                        <!-- 其他时辰选项 -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>联系方式</label>
+                    <input type="tel" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label>服务类型</label>
+                    <select name="service" required>
+                        <option value="">请选择</option>
+                        <option value="八字">八字算命</option>
+                        <option value="紫微">紫微斗数</option>
+                        <option value="符咒">符咒制作</option>
+                    </select>
+                </div>
+                <div class="price-info">
+                    <span>服务费用：</span>
+                    <span class="price">0.1 ETH</span>
+                </div>
+                <button type="submit">确认预约</button>
+            </form>
         </div>
-        <div class="footer-bottom">
-            <p>© 2024 玄妙之道. All rights reserved.</p>
-        </div>
-    </footer>
+    </div>
 
     <script src="js/main.js"></script>
 </body>

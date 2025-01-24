@@ -1,163 +1,138 @@
-// 等待页面加载完成
 document.addEventListener('DOMContentLoaded', function() {
     // 初始化变量
-    const header = document.querySelector('.main-header');
-    const musicToggle = document.getElementById('musicToggle');
-    const bgMusic = document.getElementById('bgMusic');
-    let isPlaying = false;
+    const tabs = document.querySelectorAll('.tab');
+    const tabPanes = document.querySelectorAll('.tab-pane');
+    const bookingButton = document.querySelector('.book-button');
+    const bookingModal = document.getElementById('bookingModal');
+    const closeModal = document.querySelector('.close-modal');
+    const bookingForm = document.getElementById('bookingForm');
+    const walletButton = document.querySelector('.wallet-connect');
+    const languageButtons = document.querySelectorAll('.language-switch button');
 
-    // 移除加载动画
-    setTimeout(() => {
-        const loadingScreen = document.querySelector('.loading-screen');
-        loadingScreen.style.opacity = '0';
-        setTimeout(() => {
-            loadingScreen.style.display = 'none';
-        }, 500);
-    }, 2000);
-
-    // 背景音乐控制
-    musicToggle.addEventListener('click', () => {
-        if (isPlaying) {
-            bgMusic.pause();
-            musicToggle.innerHTML = '<i class="fas fa-music"></i>';
-        } else {
-            bgMusic.play();
-            musicToggle.innerHTML = '<i class="fas fa-pause"></i>';
-        }
-        isPlaying = !isPlaying;
-    });
-
-    // 滚动效果
-    window.addEventListener('scroll', () => {
-        // 导航栏背景变化
-        if (window.scrollY > 50) {
-            header.style.background = 'rgba(0, 0, 0, 0.95)';
-        } else {
-            header.style.background = 'rgba(0, 0, 0, 0.8)';
-        }
-
-        // 添加元素动画
-        animateOnScroll();
-    });
-
-    // 平滑滚动
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        });
-    });
-
-    // 动态加载道长数据
-    const masters = [
-        {
-            name: '张道长',
-            title: '玄学大师',
-            experience: 20,
-            image: 'images/master1.jpg',
-            specialties: ['八字', '紫微斗数', '符咒'],
-            rating: 4.8,
-            status: 'online'
-        },
-        // 可以添加更多道长数据
-    ];
-
-    // 渲染道长卡片
-    function renderMasters() {
-        const mastersGrid = document.querySelector('.masters-grid');
-        masters.forEach(master => {
-            const masterCard = createMasterCard(master);
-            mastersGrid.appendChild(masterCard);
-        });
-    }
-
-    // 创建道长卡片
-    function createMasterCard(master) {
-        const card = document.createElement('div');
-        card.className = 'master-card animate__animated';
-        card.innerHTML = `
-            <div class="master-image">
-                <img src="${master.image}" alt="${master.name}">
-                <div class="status ${master.status}"></div>
-            </div>
-            <div class="master-info">
-                <h3>${master.name}</h3>
-                <p class="title">${master.title}</p>
-                <p class="experience">从业${master.experience}年</p>
-                <div class="specialties">
-                    ${master.specialties.map(s => `<span>${s}</span>`).join('')}
-                </div>
-                <div class="rating">
-                    <div class="stars">
-                        ${generateStars(master.rating)}
-                    </div>
-                    <span class="rating-number">${master.rating}</span>
-                </div>
-                <button class="consult-button">
-                    <i class="fas fa-comments"></i>
-                    立即咨询
-                </button>
-            </div>
-        `;
-        return card;
-    }
-
-    // 生成星级评分
-    function generateStars(rating) {
-        const fullStars = Math.floor(rating);
-        const hasHalfStar = rating % 1 !== 0;
-        let starsHTML = '';
-        
-        for (let i = 0; i < fullStars; i++) {
-            starsHTML += '<i class="fas fa-star"></i>';
-        }
-        if (hasHalfStar) {
-            starsHTML += '<i class="fas fa-star-half-alt"></i>';
-        }
-        const emptyStars = 5 - Math.ceil(rating);
-        for (let i = 0; i < emptyStars; i++) {
-            starsHTML += '<i class="far fa-star"></i>';
-        }
-        
-        return starsHTML;
-    }
-
-    // 滚动动画
-    function animateOnScroll() {
-        const elements = document.querySelectorAll(
-            '.service-card, .master-card, .culture-card, .testimonial-card'
-        );
-        
-        elements.forEach(element => {
-            const elementTop = element.getBoundingClientRect().top;
-            const elementBottom = element.getBoundingClientRect().bottom;
+    // 标签页切换
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            // 移除所有活动状态
+            tabs.forEach(t => t.classList.remove('active'));
+            tabPanes.forEach(p => p.classList.remove('active'));
             
-            if (elementTop < window.innerHeight - 100 && elementBottom > 0) {
-                element.classList.add('animate__animated', 'animate__fadeInUp');
+            // 添加当前活动状态
+            tab.classList.add('active');
+            const targetPane = document.getElementById(tab.dataset.tab);
+            if (targetPane) {
+                targetPane.classList.add('active');
             }
         });
-    }
+    });
+
+    // 预约弹窗控制
+    bookingButton.addEventListener('click', () => {
+        if (!isWalletConnected) {
+            alert('请先连接钱包');
+            return;
+        }
+        bookingModal.style.display = 'block';
+    });
+
+    closeModal.addEventListener('click', () => {
+        bookingModal.style.display = 'none';
+    });
+
+    window.addEventListener('click', (e) => {
+        if (e.target === bookingModal) {
+            bookingModal.style.display = 'none';
+        }
+    });
+
+    // 预约表单处理
+    let isWalletConnected = false;
+    let userAddress = '';
+
+    bookingForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        if (!isWalletConnected) {
+            alert('请先连接钱包');
+            return;
+        }
+
+        const formData = new FormData(bookingForm);
+        const bookingData = {
+            name: formData.get('name'),
+            birthdate: formData.get('birthdate'),
+            birthtime: formData.get('birthtime'),
+            phone: formData.get('phone'),
+            service: formData.get('service'),
+            walletAddress: userAddress
+        };
+
+        try {
+            // 这里添加支付逻辑
+            const amount = '0.1'; // ETH
+            const weiAmount = ethers.utils.parseEther(amount);
+            
+            // 发送支付交易
+            const provider = new ethers.providers.Web3Provider(window.ethereum);
+            const signer = provider.getSigner();
+            
+            // 替换为实际的合约地址
+            const contractAddress = 'YOUR_CONTRACT_ADDRESS';
+            
+            const tx = await signer.sendTransaction({
+                to: contractAddress,
+                value: weiAmount
+            });
+
+            // 等待交易确认
+            await tx.wait();
+
+            // 发送预约信息到服务器
+            // 这里添加实际的API调用
+            console.log('预约信息：', bookingData);
+            
+            alert('预约成功！');
+            bookingModal.style.display = 'none';
+            bookingForm.reset();
+        } catch (error) {
+            console.error('预约失败：', error);
+            alert('预约失败，请重试');
+        }
+    });
 
     // Web3钱包连接
-    const walletButton = document.querySelector('.wallet-connect');
     walletButton.addEventListener('click', async () => {
         if (typeof window.ethereum !== 'undefined') {
             try {
                 const accounts = await window.ethereum.request({
                     method: 'eth_requestAccounts'
                 });
-                const shortAddress = `${accounts[0].slice(0, 6)}...${accounts[0].slice(-4)}`;
+                userAddress = accounts[0];
+                const shortAddress = `${userAddress.slice(0, 6)}...${userAddress.slice(-4)}`;
                 walletButton.innerHTML = `
                     <i class="fas fa-wallet"></i>
                     <span>${shortAddress}</span>
                 `;
-                walletButton.classList.add('connected');
+                isWalletConnected = true;
+
+                // 监听账户变化
+                window.ethereum.on('accountsChanged', function (accounts) {
+                    if (accounts.length === 0) {
+                        // 用户断开了钱包
+                        isWalletConnected = false;
+                        walletButton.innerHTML = `
+                            <i class="fas fa-wallet"></i>
+                            <span>连接钱包</span>
+                        `;
+                    } else {
+                        userAddress = accounts[0];
+                        const shortAddress = `${userAddress.slice(0, 6)}...${userAddress.slice(-4)}`;
+                        walletButton.innerHTML = `
+                            <i class="fas fa-wallet"></i>
+                            <span>${shortAddress}</span>
+                        `;
+                    }
+                });
+
             } catch (error) {
                 console.error('连接钱包失败:', error);
                 alert('连接钱包失败，请重试');
@@ -168,60 +143,104 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // 表单提交处理
-    const contactForm = document.querySelector('.contact-form');
-    if (contactForm) {
-        contactForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const formData = new FormData(contactForm);
-            const submitButton = contactForm.querySelector('button[type="submit"]');
-            submitButton.disabled = true;
-            submitButton.textContent = '发送中...';
-
-            try {
-                // 这里添加表单提交逻辑
-                await new Promise(resolve => setTimeout(resolve, 1000)); // 模拟API请求
-                alert('消息已发送，我们会尽快回复您！');
-                contactForm.reset();
-            } catch (error) {
-                console.error('提交失败:', error);
-                alert('发送失败，请重试');
-            } finally {
-                submitButton.disabled = false;
-                submitButton.textContent = '发送信息';
-            }
-        });
-    }
-
     // 语言切换
-    const languageButtons = document.querySelectorAll('.language-switch button');
     languageButtons.forEach(button => {
         button.addEventListener('click', function() {
             languageButtons.forEach(btn => btn.classList.remove('active'));
             this.classList.add('active');
-            // 这里添加语言切换逻辑
+            
             const language = this.textContent;
-            // 临时提示
-            alert(`语言将切换为${language}（功能开发中）`);
+            if (language === 'EN') {
+                translateToEnglish();
+            } else {
+                translateToChinese();
+            }
         });
     });
 
+    // 语言翻译函数
+    function translateToEnglish() {
+        const translations = {
+            'service': {
+                title: 'Our Services',
+                items: [
+                    'BaZi Fortune Telling: Analyze Life Destiny',
+                    'Purple Star Astrology: Understand Fortune Changes',
+                    'Talisman Creation: Resolve Fortune Obstacles'
+                ]
+            },
+            'rules': {
+                title: 'Service Rules',
+                items: [
+                    'Service will be arranged within 24 hours after payment',
+                    'Appointments can be made one week in advance',
+                    'Please cancel appointments 12 hours in advance'
+                ]
+            }
+            // 添加更多翻译内容
+        };
+
+        // 更新页面文本
+        updatePageContent(translations);
+    }
+
+    function translateToChinese() {
+        const translations = {
+            'service': {
+                title: '道教服务内容',
+                items: [
+                    '八字算命：解析人生命运',
+                    '紫微斗数：了解运势变化',
+                    '符咒制作：化解运势阻碍'
+                ]
+            },
+            'rules': {
+                title: '服务规则',
+                items: [
+                    '预约付款后24小时内安排服务',
+                    '可提前一周预约时段',
+                    '如需取消预约请提前12小时'
+                ]
+            }
+            // 添加更多翻译内容
+        };
+
+        // 更新页面文本
+        updatePageContent(translations);
+    }
+
+    function updatePageContent(translations) {
+        // 更新服务内容
+        const servicePane = document.getElementById('service');
+        if (servicePane) {
+            servicePane.querySelector('h2').textContent = translations.service.title;
+            const ul = servicePane.querySelector('ul');
+            ul.innerHTML = translations.service.items.map(item => `<li>${item}</li>`).join('');
+        }
+
+        // 更新规则说明
+        const rulesPane = document.getElementById('rules');
+        if (rulesPane) {
+            rulesPane.querySelector('h2').textContent = translations.rules.title;
+            const ul = rulesPane.querySelector('ul');
+            ul.innerHTML = translations.rules.items.map(item => `<li>${item}</li>`).join('');
+        }
+    }
+
+    // 动态更新预约时间
+    function updateNextAvailable() {
+        const nextAvailableSpan = document.querySelector('.next-available');
+        if (nextAvailableSpan) {
+            const today = new Date();
+            const nextDate = new Date(today);
+            nextDate.setDate(today.getDate() + 1); // 设置为明天
+            
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            const dateString = nextDate.toLocaleDateString('zh-CN', options);
+            nextAvailableSpan.textContent = `下一个可预约时段：${dateString}`;
+        }
+    }
+
     // 初始化
-    renderMasters();
-    animateOnScroll();
-});
-
-// 页面加载完成后的动画
-window.addEventListener('load', () => {
-    document.body.classList.add('loaded');
-});
-
-// 禁用右键菜单
-document.addEventListener('contextmenu', (e) => {
-    e.preventDefault();
-});
-
-// 添加页面切换动画
-window.addEventListener('beforeunload', () => {
-    document.body.classList.add('page-transition');
+    updateNextAvailable();
 });
